@@ -1,0 +1,12 @@
+prefix=c:/growBalagrow/venv/Library
+exec_prefix=c:/growBalagrow/venv/Library
+libdir=c:/growBalagrow/venv/Library/lib
+includedir=c:/growBalagrow/venv/Library/include
+
+Name: libzmq
+Description: 0MQ c++ library
+Version: 4.3.5
+Libs: -L${libdir} -lzmq
+Libs.private: -lstdc++ 
+Requires.private: 
+Cflags: -I${includedir} 
