@@ -1,0 +1,3 @@
+[sqlalchemy.dialects]
+teradatasql = teradatasqlalchemy.dialect:TeradataDialect
+
