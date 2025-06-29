@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        How to build Dynamic graphics in HTML5
+    </title>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <canvas width="300" height="300" id="Canvas">
+    </canvas>
+
+    <!-- Buttons to control the animation loop-->
+     <div>
+        <Button id="start">Start</Button>
+        <button id="stop">Stop</button>
+     </div>
+
+     <script>
+        let canvas = $("#Canvas");
+        let context = canvas.get(0).getContext("2d");
+        context.fillStyle = "green";
+
+        // Width and height of the animation
+        let Width = canvas.width();
+        let Height = canvas.height();
+
+        let playAnimation = true;
+        let startButton = $("#start");
+        let stopButton = $("#stop");
+
+        // Code to disable start Button
+        startButton.hide();
+        startButton.click(function(){
+            $(this).hide();
+            stopButton.show();
+            playAnimation = true;
+            animate();
+        });
+
+        // Code to disable stop button
+        stopButton.click(function(){
+            $(this).hide();
+            startButton.show();
+            playAnimation = false;
+
+        });
+
+        // Code to define width and height of the shape
+
+        let Shapre = function(x, y, width, height) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+
+            // no reversal of direction in the x-axis initially
+            this.reverseX = false;
+            this.reverseY = false;
+        };
+
+        // code to generate ten random shapes for animation loop
+        let shapes = new Array();
+        for (let i = 0; i < 100; i++) {
+            let x = Math.random() * 300;
+            let y = Math.random() * 300;
+            let width = height = Math.random() * 30;
+            
+            // adding random shapes to canvas
+            shapes.push(new Shapre(x, y, width, height));
+        };
+
+        function animate() {
+            context.clearRect(0, 0, Width, Height);
+            let shapesLength = shapes.length;
+            for (let i = 0; i < shapesLength; i++) {
+                let tmpSHape = shapes[i];
+                if (!tmpSHape.reverseX) {
+                    // Increment the x coordinate by 3 units
+                    tmpSHape.x += 3;
+                } else {
+                    //decrement the x coordinates by 3 units
+                    tmpSHape.x -= 3;
+                };
+                if(!tmpSHape.reverseY) {
+                    // Increment the y coordinate by 3 units
+                    tmpSHape.y += 3;
+                } else {
+                    // Decrement the y coordinate by 3 units
+                    tmpSHape.y -= 3;
+                };
+
+                // code for shapes to bounce off the boundary
+                context.fillRect(tmpSHape.x, tmpSHape.y, tmpSHape.width, tmpSHape.height);
+                if (tmpSHape.x < 0) {
+                    tmpSHape.reverseX = false;
+                } else if (tmpSHape.x = tmpSHape.width > Width) {
+                    // Reverse the direction of shape of the position of the shape
+                    // is geater than the width of canvas
+                    tmpSHape.reverseX = true;
+                };
+                if (tmpSHape.y < 0) {
+                    tmpSHape.reverseY = false;
+                } else if (tmpSHape.y + tmpSHape.height > Height) {
+                    // Reverse the direction of shape of the position of the shape
+                    // is geater than the height of canvas
+                    tmpSHape.reverseY = true;
+
+                };
+
+            };
+            if (playAnimation) {
+                setTimeout(animate, 35);
+            };
+
+        };
+        animate();
+     </script>
+</body>
+</html>
