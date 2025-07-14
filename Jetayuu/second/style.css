@@ -51,15 +51,16 @@
     width: min(1400px, 100vw);
     height: max-content;
     padding-bottom: 1px;
-    display: flex;
-    flex-wrap: wrap;
+    display: flex; 
+    flex-wrap: wrap; 
     justify-content: space-between;
     align-items: center;
 }
 
 .banner .content h1{
+    position: absolute;
     font-family: 'ICA Rubrik';
-    font-size: 16em;
+    font-size: 11em;
     line-height: 1em;
     color: #25283b;
 }
@@ -74,12 +75,14 @@
 }
 
 .banner .content .author{
+    position: absolute;
+    right: 0;
     font-family: Poppins;
     text-align: right;
-    max-width: 200px;
+    max-width: 300px;
 }
 
-.banner .content .h2{
+.banner .content h2{
     font-size: 3em;
 }
 
